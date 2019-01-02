@@ -20,10 +20,10 @@ $defaultUserId = {kaltura_user_id}
 
 # Start msi install in process so we can retrieve the ExitCode to determine if we can then make the changes to the localSettings.json file
 # Silent install, currently not working...
-# $proc = Start-Process msiexec -Wait -PassThru -ArgumentList "/i",$msiPath,"ADDLOCAL=ALL","KALTURA_RECORDINGS_DIR=$recordingPath","KALTURA_APPTOKEN=$appToken","KALTURA_APPTOKEN_ID=$appTokenId","KALTURA_PARTNER_ID=$partnerId","KALTURA_DEFAULT_USER_ID=$defaultUserId","/L*V","T:\Kaltura\Logs\install.log","/qn"
+# $proc = Start-Process msiexec -Wait -PassThru -ArgumentList "/i",$msiPath,"ADDLOCAL=UploadServiceFeature,LaunchOnLoginFeature,CaptureAppFeature","KALTURA_RECORDINGS_DIR=$recordingPath","KALTURA_APPTOKEN=$appToken","KALTURA_APPTOKEN_ID=$appTokenId","KALTURA_PARTNER_ID=$partnerId","KALTURA_DEFAULT_USER_ID=$defaultUserId","/L*V","T:\Kaltura\Logs\install.log","/qn"
 
 # Mostly silent install, currently the one that works
-$proc = Start-Process msiexec -Wait -PassThru -ArgumentList "/i",$msiPath,"ADDLOCAL=ALL","KALTURA_RECORDINGS_DIR=$recordingPath","KALTURA_APPTOKEN=$appToken","KALTURA_APPTOKEN_ID=$appTokenId","KALTURA_PARTNER_ID=$partnerId","KALTURA_DEFAULT_USER_ID=$defaultUserId","/L*V","T:\Kaltura\Logs\install.log","/qn"
+$proc = Start-Process msiexec -Wait -PassThru -ArgumentList "/i",$msiPath,"ADDLOCAL=UploadServiceFeature,LaunchOnLoginFeature,CaptureAppFeature","KALTURA_RECORDINGS_DIR=$recordingPath","KALTURA_APPTOKEN=$appToken","KALTURA_APPTOKEN_ID=$appTokenId","KALTURA_PARTNER_ID=$partnerId","KALTURA_DEFAULT_USER_ID=$defaultUserId","/L*V","T:\Kaltura\Logs\install.log","/qn"
 if ($proc.ExitCode -eq 0) {
     $localSettingsFile = Get-Content -Raw -Path "C:\Program Files\Kaltura\Classroom\Settings\localSettings.json" | ConvertFrom-Json
     # Set logsDir
